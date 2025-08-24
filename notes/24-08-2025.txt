@@ -1,0 +1,19 @@
+The style of interpretation that our former Lox implementation -JLox - is called : walking the AST directly.
+
+
+    ` If you find that you're spending almost all your time on theory, start turning some attention to practical things;
+    it will improve your theories. If you find that you're spending almost all your time on practice, start turning some
+    attention to theoretical things; it will improve your practice.`
+        - Donal Knuth
+
+Tree-walking is simple, portable and slow.
+Native code is complex, platform specific but pretty fast.
+Bytecode sits right between the two - tree-walking and native code generation.
+
+Bytecode is a dense, linear sequence of machine instructions. But it is higher level machine code that no real chip in the world
+actually understand.
+
+The problem with a fantasy architecture, of course, is that it doesn’t exist. We solve that by writing an emulator—a simulated
+chip written in software that interprets the bytecode one instruction at a time. A virtual machine (VM), if you will.
+
+ In this chapter, we’ll get the skeleton of the application in place and create the data structures needed to store and represent a chunk of bytecode.
