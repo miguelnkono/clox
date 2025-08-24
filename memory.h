@@ -21,8 +21,8 @@
 
 // macro to free the array of bytecode. Since the newSize argument of the reallocate helper is set to zero it will free
 // the block of memory.
-#define FREE_ARRAy(type, pointer, oldCapacity) \
-    reallocate(pointer, sizeof(type) * (oldCapacity)), 0)
+#define FREE_ARRAY(type, pointer, oldCapacity) \
+    reallocate(pointer, sizeof(type) * (oldCapacity), 0)
 
 // wrapper around the realloc standard function.
 // this helper function will act like this:

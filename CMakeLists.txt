@@ -9,7 +9,9 @@ add_executable(Lox main.c
         chunk.h
         chunk.c
         memory.c
-        memory.h)
+        memory.h
+        debug.h
+        debug.c)
 
 # here we are downloading the check library for doing unit tests.
 include(FetchContent)
