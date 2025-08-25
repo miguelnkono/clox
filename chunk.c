@@ -10,20 +10,23 @@ void initChunk(Chunk *chunk) {
     chunk->count = 0;
     chunk->capacity = 0;
     chunk->code = NULL;
+    chunk->lines = NULL;
     initValueArray(&chunk->constants);
 }
 
-void writeChunk(Chunk *chunk, uint8_t byte) {
+void writeChunk(Chunk *chunk, uint8_t byte, int line) {
     // if we don't have enough capacity left.
     // we update the capacity count, and we grow the array storing the bytes.
     if (chunk->capacity < chunk->count + 1) {
         int oldCapacity = chunk->capacity;
         chunk->capacity = GROW_CAPACITY(oldCapacity);
         chunk->code = GROW_ARRAY(uint8_t, chunk->code, oldCapacity, chunk->capacity);
+        chunk->lines = GROW_ARRAY(int, chunk->lines, oldCapacity, chunk->capacity);
     }
 
     // append the byte of chunk at the end of the code array.
     chunk->code[chunk->count] = byte;
+    chunk->lines[chunk->count] = line;
     chunk->count++;
 }
 
@@ -34,6 +37,7 @@ int addConstant(Chunk *chunk, Value value) {
 
 void freeChunk(Chunk *chunk) {
     FREE_ARRAY(uint8_t, chunk->code, chunk->capacity);
+    FREE_ARRAY(int, chunk->lines, chunk->capacity);
     freeValueArray(&chunk->constants);
     initChunk(chunk);
 }

@@ -19,19 +19,20 @@ typedef enum {
     OP_RETURN,      // represent a return type bytecode.
 } OpCode;
 
-// this will represent our chunk of bytecode.
+// this will represent our chunk of bytecodes.
 // it is a dynamic array.
 typedef struct  {
     int count;              // the number of entities allocated are in used.
     int capacity;           // the number of elements in the array we have allocated.
     uint8_t* code;          // the array of bytecode for one chunk.
+    int *lines;             // the line where the byte was found in the code.
     ValueArray constants;    // the constant pool.
 } Chunk;
 
 // constructor for a chunk.
 void initChunk(Chunk *chunk);
 // append a byte to the end of the chunk.
-void writeChunk(Chunk *chunk, uint8_t byte);
+void writeChunk(Chunk *chunk, uint8_t byte, int line);
 // freeing the memory used by a chunk.
 void freeChunk(Chunk *chunk);
 // write a constant in the chunk.
