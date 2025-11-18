@@ -12,6 +12,7 @@ void initChunk(Chunk *chunk)
 
 void writeChunk(Chunk *chunk, uint8_t byte)
 {
+  // if there is not enougth capacity left.
   if (chunk->count + 1 > chunk->capacity)
   {
     int oldCapacity = chunk->capacity;
@@ -19,8 +20,8 @@ void writeChunk(Chunk *chunk, uint8_t byte)
     chunk->code = GROW_ARRAY(uint8_t, chunk->code, oldCapacity, chunk->capacity);
   }
 
-  chunk->code[chunk->count] = byte;
-  chunk->count++;
+  chunk->code[chunk->count++] = byte;
+  // chunk->count++;
 }
 
 void freeChunk(Chunk *chunk)
