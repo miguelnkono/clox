@@ -29,16 +29,33 @@ void disassembleChunk(Chunk *chunk, const char *name)
   }
 }
 
+// Helper function to get line number for display
+static int getLineForDisplay(Chunk *chunk, int offset)
+{
+  // Simple linear search through the run-length encoded lines
+  for (int i = 0; i < chunk->linesCount; i++) {
+      // If this is the last entry OR the next entry starts after our offset
+      if (i == chunk->linesCount - 1 || chunk->lines[i + 1].offset > offset) {
+          return chunk->lines[i].line;
+      }
+  }
+  return -1; // Should not happen for valid offsets
+}
+
 int disassembleInstruction(Chunk *chunk, int offset)
 {
   printf("%04d ", offset);
-  if (offset > 0 && chunk->lines[offset] == chunk->lines[offset - 1])
+
+  int currentLine = getLineForDisplay(chunk, offset);
+  int previousLine = (offset > 0) ? getLineForDisplay(chunk, offset - 1) : -1;
+
+  if (offset > 0 && currentLine == previousLine)
   {
-    printf("    | ");
+    printf("   | ");
   }
   else
   {
-    printf("%4d ", chunk->lines[offset]);
+    printf("%4d ", currentLine);
   }
 
   uint8_t instruction = chunk->code[offset];
