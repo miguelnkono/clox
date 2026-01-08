@@ -6,51 +6,6 @@
 #include "chunk.h"
 #include "memory.h"
 
-// convert a number to string.
-static void intToStr(int n, char *str)
-{
-  int i = 0;
-  int sign = n;
-
-  if (n == 0) {
-    str[0] = '0';
-    str[1] = '\0';
-    return;
-  }
-
-  if (n < 0) n = -n;
-
-  while (n > 0)
-  {
-    str[i++] = n % 10 + '0';
-    n /= 10;
-  }
-
-  if (sign < 0) str[i++] = '-';
-  str[i] = '\0';
-
-  // reverse the string
-  for (int j = 0, k = i - 1; j < k; j++, k--)
-  {
-    char temp = str[j];
-    str[j] = str[k];
-    str[k] = temp;
-  }
-}
-
-int strToInt(char *str, char stop)
-{
-  int count = 0;
-  for (int i = 0; str[i] != stop && str[i] != '\0'; i++)
-  {
-    if (str[i] >= '0' && str[i] <= '9')
-    {
-      count = count * 10 + (str[i] - '0');
-    }
-  }
-  return count;
-}
-
 void replaceCount(char *str, char *lineNum, char *newCount)
 {
   char *lineStart = str;

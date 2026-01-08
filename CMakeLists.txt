@@ -17,6 +17,8 @@ add_executable(${PROJECT_NAME}
   debug.h
   value.c
   value.h
+  vm.c
+  vm.h
 )
 
 set_property(TARGET clox PROPERTY C_STANDARD 11)
