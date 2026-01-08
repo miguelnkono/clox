@@ -10,12 +10,12 @@ int main(int argc, const char *argv[]) {
   initChunk(&chunk);
 
   // Add several instructions from the same line
-  int constant_idx = addConstant(&chunk, 1.2);
-  writeChunk(&chunk, constant_idx, 124);
+  uint8_t constant_idx = addConstant(&chunk, 1.2);
+  writeChunk(&chunk, constant_idx, 123);
+  // writeChunk(&chunk, OP_NEGATE, 124);
 
   // Add instructions from different lines
-  writeChunk(&chunk, OP_RETURN, 124);
-  // writeChunk(&chunk, OP_RETURN, 125);
+  writeChunk(&chunk, OP_RETURN, 125);
 
   // disassembleChunk(&chunk, "test chunk");
 

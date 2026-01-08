@@ -1,8 +1,10 @@
-#ifndef clox_common_h
-#define clox_common_h
+#ifndef __COMMON_H__
+#define __COMMON_H__
 
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
-#endif // clox_common_h
+#define DEBUG_TRACE_EXECUTION
+
+#endif // __COMMON_H__
