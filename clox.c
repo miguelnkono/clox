@@ -11,8 +11,9 @@ int main(int argc, const char *argv[]) {
 
   // Add several instructions from the same line
   uint8_t constant_idx = addConstant(&chunk, 1.2);
+  writeChunk(&chunk, OP_CONSTANT, 123);
   writeChunk(&chunk, constant_idx, 123);
-  // writeChunk(&chunk, OP_NEGATE, 124);
+  writeChunk(&chunk, OP_NEGATE, 124);
 
   // Add instructions from different lines
   writeChunk(&chunk, OP_RETURN, 125);
